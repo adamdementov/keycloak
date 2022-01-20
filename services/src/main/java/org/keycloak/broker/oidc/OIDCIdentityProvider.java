@@ -566,9 +566,8 @@ public class OIDCIdentityProvider extends AbstractOAuth2IdentityProvider<OIDCIde
         if (!token.isActive(getConfig().getAllowedClockSkew())) {
             throw new IdentityBrokerException("Token is no longer valid");
         }
-
         if (!ignoreAudience && !token.hasAudience(getConfig().getClientId())) {
-            throw new IdentityBrokerException("Wrong audience from token.");
+            throw new IdentityBrokerException("Wrong audience from token.:"+getConfig().getClientId());
         }
         
         if (!ignoreAudience && (token.getIssuedFor() != null && !getConfig().getClientId().equals(token.getIssuedFor()))) {
